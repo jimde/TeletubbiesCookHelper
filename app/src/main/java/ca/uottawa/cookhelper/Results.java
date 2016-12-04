@@ -1,6 +1,7 @@
 package ca.uottawa.cookhelper;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,7 +17,7 @@ import java.util.List;
 
 import static ca.uottawa.cookhelper.R.id.searchBox;
 
-public class Results extends ListActivity {
+public class Results extends ListActivity implements AdapterView.OnItemClickListener{
 
     private RecipeDataSource recipeDB;
 
@@ -30,53 +31,24 @@ public class Results extends ListActivity {
 
 
     public void onCreate(Bundle savedInstanceState){
+        System.out.println(">>>>>>>>>> results oncreate");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
 
-        recipeDB = new RecipeDataSource(this);
-        recipeDB.open();
-
+        Entry entry;
         List<Entry> values = new ArrayList<Entry>();
-        userQuery = (EditText)findViewById(searchBox);
-
-
-
-        ArrayList<String> test = new ArrayList<String>();
-
-        Recipe testRes = new Recipe("Name", test, "Italian", "something", "disc");
-
+        String s = getIntent().getStringExtra("item_id");
+        System.out.println("s:"+s);
         try {
-            recipeDB.addToDB(testRes);
-            System.out.println("Added");
-        }
-        catch (IOException e){}
-
-
-        try {
-            //values = recipeDB.queryDB(userQuery.getText().toString());
-            values = recipeDB.getAllEntries();
-            System.out.print("values set");
+            entry = (Entry) RecipeDataSource.decodeFromString(s);
+            values = (ArrayList<Entry>)entry.getValue();
         }
         catch(Exception e){
-            System.out.println( e.getClass().getCanonicalName());
-            //values=null;
-        }
-
-
-
-        this.recipeDB = HomeScreen.recipeDB;
-        //recipeDB = new RecipeDataSource(this);
-        recipeDB.open();
-
-
-        //userQuery = (EditText)findViewById(searchBox);
-
-        try {
-            values = recipeDB.getAllEntries();
-        }
-        catch(Exception e){
+            System.out.println(">>> reading from intent");
             System.out.println( e.getClass().getCanonicalName());
         }
+
 
 
 
@@ -102,7 +74,21 @@ public class Results extends ListActivity {
         */
     }
     public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+        System.out.println("clicked list item");
 
+        Intent myIntent = new Intent(Results.this, RecipePage.class);
+
+        try {
+            Entry entry = (Entry)parent.getItemAtPosition(position);
+            Recipe recipe = (Recipe)entry.getValue();
+            System.out.println(recipe.getRecipeTitle());
+            System.out.println(RecipeDataSource.encodeToString(entry));
+            myIntent.putExtra("item_data", RecipeDataSource.encodeToString(entry));
+        }
+        catch(Exception e){
+            System.out.println( e.getClass().getCanonicalName());
+        }
+        startActivity(myIntent);
     }
     /*
     public void clickedAddRecipeBtn(View view){

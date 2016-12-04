@@ -24,6 +24,9 @@ public class Recipe implements Serializable {
         this.recipeText = description;
         this.ingredients = new ArrayList<>(ingredients);
     }
+    public Recipe(){
+
+    }
 
     public void setRecipeTitle(String recipeTitle){
         this.recipeTitle = recipeTitle;

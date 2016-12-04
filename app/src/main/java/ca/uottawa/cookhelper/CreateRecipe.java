@@ -75,8 +75,8 @@ public class CreateRecipe extends AppCompatActivity{
         inlist.add("D");
         inlist.add("E");
         try {
-            //recipeDB.addToDB(new Recipe(name, stringToList(ingredients), category, type, description));
-            recipeDB.addToDB(new Recipe("recipe name", inlist, "category name", "type name", "this is a description"));
+            recipeDB.addToDB(new Recipe(name, stringToList(ingredients), category, type, description));
+            //recipeDB.addToDB(new Recipe("recipe name", inlist, "category name", "type name", "this is a description"));
         }
         catch(Exception e){System.out.println( e.getClass().getCanonicalName());}
         System.out.println("end of click confirm");

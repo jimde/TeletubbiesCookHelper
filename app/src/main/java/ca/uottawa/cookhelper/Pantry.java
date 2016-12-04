@@ -51,7 +51,7 @@ public class Pantry extends ListActivity implements AdapterView.OnItemClickListe
     public void onItemClick(AdapterView<?> parent, View view, int position, long id){
         System.out.println("clicked pantry item");
 
-        Intent myIntent = new Intent(Pantry.this, RecipePage.class);
+        Intent myIntent = new Intent(Pantry.this, IngredientPage.class);
 
         try {
             Entry entry = (Entry)parent.getItemAtPosition(position);

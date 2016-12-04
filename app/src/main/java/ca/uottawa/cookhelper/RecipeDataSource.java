@@ -108,7 +108,38 @@ public class RecipeDataSource {
 
 
     private boolean checkRecipeSearch(Recipe recipe, String search){ //check if recipe matches search criteria
-        System.out.println(">>>>>>>>>>>>>>>>>>>> start of checkRecipeSearch");
+        String newSearch = convertExpression(search,recipe);
+        return evaluateExpression(newSearch);
+
+        /*
+        System.out.println(">>>>>>>>>>>>>>>>>>>> end of checkRecipeSearch");
+        System.out.println("newSearch:" + newSearch);
+        return (newSearch.equals("T "));
+        */
+    }
+    private boolean queryInStatement(String query, String statement){
+        String[] split = statement.split(" ");
+        for(int i = 0; i < split.length; i++){
+            if(split[i].toUpperCase().equals(query.toUpperCase())){
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    private boolean ingredientInRecipe(String query, List<String> ingredients){
+        System.out.println(">>>>>>>>>>>>>>>>>>>> start of ingredientInRecipe");
+        boolean inList = false;
+        for(int i = 0; i < ingredients.size(); i++){
+            if(ingredients.get(i).equals(query)){
+                return true;
+            }
+        }
+        System.out.println(">>>>>>>>>>>>>>>>>>>> end of ingredientInRecipe");
+        return inList;
+    }
+    private String convertExpression(String search, Recipe recipe){
         String newSearch = "";
         String[] split = search.split(" ");
         for(int i = 0; i < split.length; i++){
@@ -124,91 +155,134 @@ public class RecipeDataSource {
                 newSearch += split[i] + " " ;
             }
         }
-        System.out.println("175:" + newSearch);
-        split = newSearch.split(" ");
-        newSearch = "";
-        for(int i = 0; i < split.length; i++){
-            if(split[i].toUpperCase().equals("NOT")){
-                try{
-                    if(split[i+1].toUpperCase().equals("T")){
-                        newSearch += "F ";
-                    }
-                    else{
-                        newSearch += "T ";
-                    }
-                    i++;
-                }
-                catch(ArrayIndexOutOfBoundsException e){}
-            }
-            else{
-                newSearch += split[i] + " ";
-            }
-        }
-        System.out.println("195:" + newSearch);
-
-        while(newSearch.split(" ").length > 1){
-            split = newSearch.split(" ");
-            newSearch = "";
-
-            for(int i = 0; i < split.length; i++){
-                if(split[i].toUpperCase().equals("NOT")){
-                    try{
-                        if(split[i+1].toUpperCase().equals("T")){
-                            newSearch += "F ";
-                        }
-                        else{
-                            newSearch += "T ";
-                        }
-                        i++;
-                    }
-                    catch(ArrayIndexOutOfBoundsException e){}
-                }
-                else if(split[i].toUpperCase().equals("AND")){
-                    try{
-                        if(split[i-1].equals("T") && split[i+1].equals("T")){
-                            newSearch += "T ";
-                        }
-                        else{
-                            newSearch += "F ";
-                        }
-                        i++;
-                    }
-                    catch(ArrayIndexOutOfBoundsException e){}
-                }
-                else if(split[i].equals("OR")){
-                    try{
-                        if(split[i-1].equals("T") || split[i+1].equals("T")){
-                            newSearch += "T ";
-                        }
-                        else{
-                            newSearch += "F ";
-                        }
-                        i++;
-                    }
-                    catch(ArrayIndexOutOfBoundsException e){}
-                }
-            }
-            System.out.println("218:" + newSearch);
-        }
-        split = newSearch.split(" ");
-        //newSearch = split.toString();
-
-        System.out.println(">>>>>>>>>>>>>>>>>>>> end of checkRecipeSearch");
-        System.out.println("newSearch:" + newSearch);
-        return (newSearch.equals("T "));
+        return newSearch;
     }
-
-
-    public boolean ingredientInRecipe(String query, List<String> ingredients){
-        System.out.println(">>>>>>>>>>>>>>>>>>>> start of ingredientInRecipe");
-        boolean inList = false;
-        for(int i = 0; i < ingredients.size(); i++){
-            if(ingredients.get(i).equals(query)){
-                return true;
+    private boolean evaluateExpression(String expression){
+        String[] split = expression.split(" ");
+        String newSearch = "";
+        System.out.println("split.length: " + split.length);
+        for(int i = 0; i < split.length; i++){
+            System.out.println("NOT: " + Arrays.toString(split));
+            boolean found = false;
+            newSearch = "";
+            for(int j = 0; j < split.length; j++){
+                //System.out.println(i + ", " + j);
+                if(split[j].toUpperCase().equals("NOT") && !found){
+                    try{
+                        if(split[j+1].toUpperCase().equals("T")){
+                            newSearch += "F ";
+                        }
+                        else{
+                            newSearch += "T ";
+                        }
+                        j++;
+                    }
+                    catch(Exception e){
+                        System.out.println( e.getClass().getCanonicalName());
+                    }
+                    found = true;
+                }
+                else{
+                    newSearch += split[j] + " ";
+                }
             }
+            split = newSearch.split(" ");
+
+
+
         }
-        System.out.println(">>>>>>>>>>>>>>>>>>>> end of ingredientInRecipe");
-        return inList;
+        System.out.println("split.length: " + split.length);
+        for(int i = 0; i < split.length; i++){
+            System.out.println("AND: " + Arrays.toString(split));
+            boolean found = false;
+            newSearch = "";
+            for(int j = 0; j < split.length; j++){
+                //System.out.println(i + ", " + j);
+                if(split[j].toUpperCase().equals("AND") && !found){
+                    try{
+                        if(split[j-1].toUpperCase().equals("T") && split[j+1].toUpperCase().equals("T") && !found){
+                            newSearch += "T ";
+                        }
+                        else{
+                            newSearch += "F ";
+                        }
+                        j++;
+                        found = true;
+
+                        StringBuilder sb = new StringBuilder(newSearch);
+                        sb.deleteCharAt(newSearch.length()-3);
+                        sb.deleteCharAt(newSearch.length()-4);
+                        newSearch = sb.toString();
+
+                    }
+                    catch(Exception e){
+                        System.out.println( e.getClass().getCanonicalName());
+                    }
+                }
+                else{
+                    newSearch += split[j] + " ";
+
+                }
+                //System.out.println("newSearch:" + newSearch);
+
+            }
+            split = newSearch.split(" ");
+
+
+
+
+        }
+
+        System.out.println("split.length: " + split.length);
+        for(int i = 0; i < split.length; i++){
+            System.out.println("OR: " + Arrays.toString(split));
+            boolean found = false;
+            newSearch = "";
+            for(int j = 0; j < split.length; j++){
+                //System.out.println(i + ", " + j);
+                if(split[j].toUpperCase().equals("OR") && !found){
+                    try{
+                        if((split[j-1].toUpperCase().equals("T") || split[j+1].toUpperCase().equals("T")) && !found){
+                            newSearch += "T ";
+                        }
+                        else{
+                            newSearch += "F ";
+                        }
+                        j++;
+                        found = true;
+
+                        StringBuilder sb = new StringBuilder(newSearch);
+                        sb.deleteCharAt(newSearch.length()-3);
+                        sb.deleteCharAt(newSearch.length()-4);
+                        newSearch = sb.toString();
+
+                    }
+                    catch(Exception e){
+                        System.out.println( e.getClass().getCanonicalName());
+                    }
+                }
+                else{
+                    newSearch += split[j] + " ";
+
+                }
+                //System.out.println("newSearch:" + newSearch);
+
+            }
+            split = newSearch.split(" ");
+
+
+
+
+        }
+
+
+
+
+        System.out.println(Arrays.toString(split));
+
+
+
+        return true;
     }
 
     public static String encodeToString(Serializable o) throws IOException{

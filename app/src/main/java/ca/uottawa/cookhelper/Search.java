@@ -3,10 +3,13 @@ package ca.uottawa.cookhelper;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.view.menu.ExpandedMenuView;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+
+import java.util.List;
 
 public class Search extends AppCompatActivity {
     private RecipeDataSource recipeDB;
@@ -36,14 +39,31 @@ public class Search extends AppCompatActivity {
     }
 
     public void toResults(View view){
+        recipeDB = new RecipeDataSource(this);
+        recipeDB.open();
 
-
+        userQuery = (EditText)findViewById(R.id.searchBox);
         Intent myIntent = new Intent(this, Results.class);
-        try {
-            myIntent.putExtra("RECIPE_SEARCH_RESULTS", recipeDB.queryDB(userQuery.getText().toString()));
+        System.out.println("gettext:"+userQuery.getText().toString());
+        if(userQuery.getText().toString().matches("")) {
+            System.out.println("empty");
+            try {
+                myIntent.putExtra("item_id", RecipeDataSource.encodeToString(new Entry("search_result_list", recipeDB.getAllEntries())));
+            }
+            catch(Exception e){
+                System.out.println(">>> == \"\"");
+                System.out.println( e.getClass().getCanonicalName());
+            }
         }
-        catch(Exception e){
-            System.out.println( e.getClass().getCanonicalName());
+        else{
+            System.out.println("not empty");
+            try {
+                myIntent.putExtra("item_id",
+                        RecipeDataSource.encodeToString(new Entry("search_result_list", recipeDB.queryDB(userQuery.getText().toString()))));
+            } catch (Exception e) {
+                System.out.println(">>> != \"\"");
+                System.out.println(e.getClass().getCanonicalName());
+            }
         }
         startActivity(myIntent);
     }

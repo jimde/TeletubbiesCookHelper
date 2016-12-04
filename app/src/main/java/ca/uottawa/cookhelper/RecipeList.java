@@ -94,6 +94,7 @@ public class RecipeList extends ListActivity implements AdapterView.OnItemClickL
             Entry entry = (Entry)parent.getItemAtPosition(position);
             Recipe recipe = (Recipe)entry.getValue();
             System.out.println(recipe.getRecipeTitle());
+            System.out.println(RecipeDataSource.encodeToString(entry));
             myIntent.putExtra("item_data", RecipeDataSource.encodeToString(entry));
         }
         catch(Exception e){
