@@ -10,6 +10,7 @@ import android.view.WindowManager;
 public class HomeScreen extends AppCompatActivity {
     public static IngredientDataSource ingredientDB;
     public static RecipeDataSource recipeDB;
+    private RecentDataSource recentDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +23,10 @@ public class HomeScreen extends AppCompatActivity {
 
         ingredientDB = new IngredientDataSource(this);
         recipeDB = new RecipeDataSource(this);
+        recentDB = new RecentDataSource(this);
         ingredientDB.open();
         recipeDB.open();
+        recentDB.open();
     }
     public void toSearchScreenPage(View view){
         Intent myIntent = new Intent(this, Search.class);

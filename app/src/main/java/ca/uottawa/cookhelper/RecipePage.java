@@ -19,6 +19,9 @@ public class RecipePage extends ListActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        System.out.println("RecipePage oncreate");
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_page);
 
