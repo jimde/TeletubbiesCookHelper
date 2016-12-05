@@ -58,7 +58,7 @@ public class Search extends AppCompatActivity {
         else{
             System.out.println("not empty");
             try {
-                myIntent.putExtra("item_id",
+                myIntent.putExtra("item_data",
                         RecipeDataSource.encodeToString(new Entry("search_result_list", recipeDB.queryDB(userQuery.getText().toString()))));
             } catch (Exception e) {
                 System.out.println(">>> != \"\"");

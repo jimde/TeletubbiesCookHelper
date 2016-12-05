@@ -121,6 +121,9 @@ public class RecipeDataSource {
         cursor.close();
 
         for(int i = 0; i < allEntries.size(); i++){
+            Recipe r = (Recipe)allEntries.get(i).getValue();
+            System.out.println("checking recipe: " +r.getRecipeTitle());
+            System.out.println("check recipe result:"+checkRecipeSearch((Recipe)allEntries.get(i).getValue(),query));
             if(checkRecipeSearch((Recipe)allEntries.get(i).getValue(),query)){
                 results.add(allEntries.get(i));
             }
@@ -136,6 +139,7 @@ public class RecipeDataSource {
 
     private boolean checkRecipeSearch(Recipe recipe, String search){ //check if recipe matches search criteria
         String newSearch = convertExpression(search,recipe);
+        System.out.println(">>>>>>>> newsearch:" + newSearch);
         return evaluateExpression(newSearch);
 
         /*
@@ -156,15 +160,15 @@ public class RecipeDataSource {
 
 
     private boolean ingredientInRecipe(String query, List<String> ingredients){
-        System.out.println(">>>>>>>>>>>>>>>>>>>> start of ingredientInRecipe");
-        boolean inList = false;
+        //System.out.println(">>>>>>>>>>>>>>>>>>>> start of ingredientInRecipe");
+        query = query.replaceAll("\\s+","");
         for(int i = 0; i < ingredients.size(); i++){
-            if(ingredients.get(i).equals(query)){
+            if(ingredients.get(i).toUpperCase().equals(query.toUpperCase())){
                 return true;
             }
         }
-        System.out.println(">>>>>>>>>>>>>>>>>>>> end of ingredientInRecipe");
-        return inList;
+        //System.out.println(">>>>>>>>>>>>>>>>>>>> end of ingredientInRecipe");
+        return false;
     }
     private String convertExpression(String search, Recipe recipe){
         String newSearch = "";
@@ -187,9 +191,9 @@ public class RecipeDataSource {
     private boolean evaluateExpression(String expression){
         String[] split = expression.split(" ");
         String newSearch = "";
-        System.out.println("split.length: " + split.length);
+        //System.out.println("split.length: " + split.length);
         for(int i = 0; i < split.length; i++){
-            System.out.println("NOT: " + Arrays.toString(split));
+            //System.out.println("NOT: " + Arrays.toString(split));
             boolean found = false;
             newSearch = "";
             for(int j = 0; j < split.length; j++){
@@ -218,9 +222,9 @@ public class RecipeDataSource {
 
 
         }
-        System.out.println("split.length: " + split.length);
+        //System.out.println("split.length: " + split.length);
         for(int i = 0; i < split.length; i++){
-            System.out.println("AND: " + Arrays.toString(split));
+            //System.out.println("AND: " + Arrays.toString(split));
             boolean found = false;
             newSearch = "";
             for(int j = 0; j < split.length; j++){
@@ -260,9 +264,9 @@ public class RecipeDataSource {
 
         }
 
-        System.out.println("split.length: " + split.length);
+        //System.out.println("split.length: " + split.length);
         for(int i = 0; i < split.length; i++){
-            System.out.println("OR: " + Arrays.toString(split));
+            //System.out.println("OR: " + Arrays.toString(split));
             boolean found = false;
             newSearch = "";
             for(int j = 0; j < split.length; j++){
@@ -305,11 +309,15 @@ public class RecipeDataSource {
 
 
 
-        System.out.println(Arrays.toString(split));
+        //System.out.println(Arrays.toString(split));
+        if(newSearch.equals("T ")){
+            return true;
+        }
+        else{
+            return false;
+        }
 
 
-
-        return true;
     }
 
     public static String encodeToString(Serializable o) throws IOException{
