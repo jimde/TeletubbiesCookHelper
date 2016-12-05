@@ -115,6 +115,18 @@ public class RecipeList extends ListActivity implements AdapterView.OnItemClickL
     protected void onResume() {
         System.out.println(">>>>>>>>>> allrecipe onresume");
         recipeDB.open();
+
+        List<Entry> values = new ArrayList<Entry>();
+
+        try {
+            values = recipeDB.getAllEntries();
+        }
+        catch(Exception e){
+            System.out.println( e.getClass().getCanonicalName());
+        }
+        ArrayAdapter<Entry> adapter = new ArrayAdapter<Entry>(this,android.R.layout.simple_list_item_1, values);
+        setListAdapter(adapter);
+
         super.onResume();
     }
 

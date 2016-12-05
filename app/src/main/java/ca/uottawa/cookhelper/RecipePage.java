@@ -3,6 +3,7 @@ package ca.uottawa.cookhelper;
 import android.app.ListActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -13,6 +14,8 @@ public class RecipePage extends ListActivity {
     private TextView recipeDescription;
     private TextView recipeCategory;
     private TextView recipeType;
+    private static Entry entry;
+    private RecipeDataSource recipeDB;
 
 
 
@@ -25,8 +28,12 @@ public class RecipePage extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_page);
 
+        recipeDB = new RecipeDataSource(this);
+        recipeDB.open();
+
+
         String s = getIntent().getStringExtra("item_data");
-        Entry entry;
+        //Entry entry;
         Recipe recipe = new Recipe();
 
         System.out.println(s);
@@ -66,5 +73,16 @@ public class RecipePage extends ListActivity {
         setListAdapter(adapter);
 
 
+    }
+
+    public void clickedEdit(View view){
+
+    }
+    public void clickedDelete(View view){
+        System.out.println("clicked delete recipe");
+        recipeDB = new RecipeDataSource(this);
+        recipeDB.open();
+        recipeDB.deleteEntry(entry);
+        finish();
     }
 }
