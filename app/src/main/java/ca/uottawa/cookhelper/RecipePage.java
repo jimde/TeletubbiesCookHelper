@@ -1,6 +1,7 @@
 package ca.uottawa.cookhelper;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -36,7 +37,7 @@ public class RecipePage extends ListActivity {
         //Entry entry;
         Recipe recipe = new Recipe();
 
-        System.out.println(s);
+        //System.out.println(s);
 
         try{
             entry = (Entry)RecipeDataSource.decodeFromString(s);
@@ -76,7 +77,22 @@ public class RecipePage extends ListActivity {
     }
 
     public void clickedEdit(View view){
+        Intent myIntent = new Intent(this, EditRecipe.class);
 
+
+
+        try {
+            myIntent.putExtra("item_data", RecipeDataSource.encodeToString(entry));
+        }
+        catch(Exception e){
+            System.out.println( e.getClass().getCanonicalName());
+        }
+
+
+
+
+
+        startActivity(myIntent);
     }
     public void clickedDelete(View view){
         System.out.println("clicked delete recipe");

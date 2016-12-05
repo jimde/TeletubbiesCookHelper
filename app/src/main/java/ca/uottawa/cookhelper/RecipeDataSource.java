@@ -65,10 +65,23 @@ public class RecipeDataSource {
             entries.add(entry);
             cursor.moveToNext();
         }
-
-
         cursor.close();
         return entries;
+    }
+    public Entry editEntry(Entry entry){
+        ContentValues values = new ContentValues();
+        try {
+            values.put(RecipeSQLiteHelper.COLUMN_RECIPE, encodeToString((Recipe) entry.getValue()));
+        }
+        catch(Exception e){
+            System.out.println( e.getClass().getCanonicalName());
+        }
+        long insertID = (long)entry.getKey();
+
+        database.update(TABLE_RECIPES, values, "_id="+insertID,null);
+
+
+        return entry;
     }
     public List<Recipe> getAllRecipes() throws IOException, ClassNotFoundException{
         List<Entry> entries = this.getAllEntries();
