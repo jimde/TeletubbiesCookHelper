@@ -80,7 +80,21 @@ public class RecipeDataSource {
 
         database.update(TABLE_RECIPES, values, "_id="+insertID,null);
 
-
+        return entry;
+    }
+    public Entry getEntry(long id){
+        Cursor cursor = database.query(TABLE_RECIPES, allColumns, "_id="+id, null, null, null, null);
+        cursor.moveToFirst();
+        Entry entry = new Entry(null,null);
+        try {
+            entry = (Entry) decodeFromString(cursor.getString(1));
+            System.out.println("getentry:"+entry.getValue());
+        }
+        catch(Exception e){
+            System.out.println( e.getClass().getCanonicalName());
+        }
+        cursor.close();
+        entry = new Entry(id,(Recipe)entry.getValue());
         return entry;
     }
     public List<Recipe> getAllRecipes() throws IOException, ClassNotFoundException{

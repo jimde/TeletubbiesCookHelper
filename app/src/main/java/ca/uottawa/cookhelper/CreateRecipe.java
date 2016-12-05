@@ -54,7 +54,7 @@ public class CreateRecipe extends AppCompatActivity{
     }
 
 
-    private List<String> stringToList(String s){
+    public static List<String> stringToList(String s){
         String[] split = s.split(" ");
         List<String> list = new ArrayList<String>();
         for(int i = 0; i < split.length; i++){

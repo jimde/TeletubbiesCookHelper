@@ -22,6 +22,9 @@ public class Entry<K,V> implements Serializable{
         key = k;
         value = v;
     }
+    public void setValue(V v){
+        value = v;
+    }
     public String toString(){
         return value.toString();
     }

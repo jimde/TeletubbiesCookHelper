@@ -107,7 +107,7 @@
             android:id="@+id/confirmChangesBtn"
             android:layout_gravity="center_horizontal"
             android:background="#B7C68B"
-            android:onClick="clickedConfirmBtn" />
+            android:onClick="clickedConfirmChanges" />
 
     </LinearLayout>
 
