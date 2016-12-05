@@ -32,6 +32,7 @@ public class RecipeList extends ListActivity implements AdapterView.OnItemClickL
     private Spinner userRecipeType;
     private Spinner userRecipeCategory;
     private RecipeDataSource recipeDB;
+    private RecentDataSource recentDB;
 
 
     public void onCreate(Bundle savedInstanceState){
@@ -42,6 +43,8 @@ public class RecipeList extends ListActivity implements AdapterView.OnItemClickL
         //this.recipeDB = HomeScreen.recipeDB;
         recipeDB = new RecipeDataSource(this);
         recipeDB.open();
+        recentDB = new RecentDataSource(this);
+        recentDB.open();
 
         List<Entry> values = new ArrayList<Entry>();
         //userQuery = (EditText)findViewById(searchBox);
@@ -94,8 +97,11 @@ public class RecipeList extends ListActivity implements AdapterView.OnItemClickL
             Entry entry = (Entry)parent.getItemAtPosition(position);
             Recipe recipe = (Recipe)entry.getValue();
             System.out.println(recipe.getRecipeTitle());
-            System.out.println(RecipeDataSource.encodeToString(entry));
+            //System.out.println(RecipeDataSource.encodeToString(entry));
             myIntent.putExtra("item_data", RecipeDataSource.encodeToString(entry));
+
+            System.out.println("recentDB.addToQueue(recipe);");
+            recentDB.addToQueue(recipe);
         }
         catch(Exception e){
             System.out.println( e.getClass().getCanonicalName());
