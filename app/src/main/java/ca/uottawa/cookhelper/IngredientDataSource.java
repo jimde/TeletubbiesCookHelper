@@ -115,6 +115,23 @@ public class IngredientDataSource {
         return inList;
     }
 
+
+    public void clearDB(){
+        List<Entry> allEntries;
+        try {
+            allEntries = this.getAllEntries();
+            for(int i = 0; i < allEntries.size(); i++){
+                this.deleteEntry(allEntries.get(i));
+            }
+        }
+        catch(Exception e){
+            System.out.println( e.getClass().getCanonicalName());
+        }
+    }
+
+
+
+
     public static String encodeToString(Serializable o) throws IOException{
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ObjectOutputStream oos = new ObjectOutputStream(baos);

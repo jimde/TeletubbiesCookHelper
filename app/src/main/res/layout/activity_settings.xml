@@ -204,7 +204,7 @@
                         android:id="@+id/resetBtn"
                         android:layout_gravity="center"
                         android:background="#B7C68B"
-                        android:onClick="resetDatabase" />
+                        android:onClick="resetApp" />
                 </FrameLayout>
             </LinearLayout>
         </LinearLayout>
