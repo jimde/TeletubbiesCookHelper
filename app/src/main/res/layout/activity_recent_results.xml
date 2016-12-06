@@ -11,8 +11,22 @@
     android:background="#B3A580"
     tools:context="ca.uottawa.cookhelper.RecentResults">
 
-    <ListView
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@android:id/list" />
+        android:layout_height="match_parent">
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@android:id/list" />
+
+        <Button
+            android:text="Clear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button"
+            android:onClick="clearRecent" />
+    </LinearLayout>
+
 </RelativeLayout>

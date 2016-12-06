@@ -118,6 +118,18 @@ public class RecentDataSource {
 
     }
 
+    public void clearDB(){
+        List<Entry> allEntries;
+        try {
+            allEntries = this.getAllEntries();
+            for(int i = 0; i < allEntries.size(); i++){
+                this.deleteEntry(allEntries.get(i));
+            }
+        }
+        catch(Exception e){
+            System.out.println( e.getClass().getCanonicalName());
+        }
+    }
 
 
 
