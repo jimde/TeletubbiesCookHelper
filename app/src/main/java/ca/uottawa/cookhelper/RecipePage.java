@@ -119,17 +119,15 @@ public class RecipePage extends ListActivity {
 
         //finish();
     }
-/*
+
     @Override
     public void onResume(){
-        Recipe recipe = (Recipe)recipeDB.getEntry((long)entry.getKey()).getValue();
+        Recipe recipe = (Recipe) recipeDB.getEntry((long) entry.getKey()).getValue();
 
-
-
-        recipeTitle = (TextView)findViewById(R.id.recipePageTitle);
-        recipeDescription = (TextView)findViewById(R.id.recipePageDescription);
-        recipeType = (TextView)findViewById(R.id.recipePageType);
-        recipeCategory = (TextView)findViewById(R.id.recipePageCategory);
+        recipeTitle = (TextView) findViewById(R.id.recipePageTitle);
+        recipeDescription = (TextView) findViewById(R.id.recipePageDescription);
+        recipeType = (TextView) findViewById(R.id.recipePageType);
+        recipeCategory = (TextView) findViewById(R.id.recipePageCategory);
 
         recipeTitle.setText(recipe.getRecipeTitle());
         recipeDescription.setText(recipe.getText());
@@ -137,13 +135,12 @@ public class RecipePage extends ListActivity {
         recipeCategory.setText(recipe.getCategoryName());
 
         ArrayAdapter<String> adapter = (ArrayAdapter<String>) getListAdapter();
-        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, recipe.getIngredients());
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, recipe.getIngredients());
         setListAdapter(adapter);
 
 
+        super.onResume();
     }
-*/
-
 
 
 }
