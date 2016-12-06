@@ -43,12 +43,12 @@ public class Search extends AppCompatActivity {
         recipeDB.open();
 
         userQuery = (EditText)findViewById(R.id.searchBox);
-        Intent myIntent = new Intent(this, Results.class);
+        Intent myIntent = new Intent(this, RecipeResults.class);
         System.out.println("gettext:"+userQuery.getText().toString());
         if(userQuery.getText().toString().matches("")) {
             System.out.println("empty");
             try {
-                myIntent.putExtra("item_id", RecipeDataSource.encodeToString(new Entry("search_result_list", recipeDB.getAllEntries())));
+                myIntent.putExtra("item_data", RecipeDataSource.encodeToString(new Entry("search_result_list", recipeDB.getAllEntries())));
             }
             catch(Exception e){
                 System.out.println(">>> == \"\"");

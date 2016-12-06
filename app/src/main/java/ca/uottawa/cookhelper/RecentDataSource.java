@@ -76,16 +76,39 @@ public class RecentDataSource {
     public Entry addToQueue(Recipe recipe){
         System.out.println(">>> added to recent queue");
 
+
+
+
         List<Entry> allEntries = new ArrayList<Entry>();
         try {
-            System.out.println("allEntries = getAllEntries();");
-            allEntries = getAllEntries();
-            System.out.println("allEntries = getAllEntries(); -- end");
+            allEntries = this.getAllEntries();
         }
         catch(Exception e){
             System.out.println("allEntries = this.getAllEntries();");
             System.out.println( e.getClass().getCanonicalName());
         }
+
+
+
+        Entry returnEntry = new Entry(-1,recipe);
+        boolean alreadyInQueue = false;
+        for(int i = 0; i < allEntries.size(); i++){
+            Recipe temp = (Recipe)allEntries.get(i).getValue();
+            if(recipe.getRecipeTitle().equals(temp.getRecipeTitle())){
+                alreadyInQueue = true;
+            }
+        }
+        if(!alreadyInQueue) {
+            try {
+                System.out.println("entry = addToDB(recipe);");
+                returnEntry = addToDB(recipe);
+            } catch (Exception e) {
+                System.out.println("entry = addToDB(recipe);");
+                System.out.println(e.getClass().getCanonicalName());
+            }
+        }
+
+
 
         try {
             if (allEntries.size() >= numberStored) {
@@ -101,19 +124,9 @@ public class RecentDataSource {
             System.out.println( e.getClass().getCanonicalName());
         }
 
-        Entry entry = new Entry(-1,recipe);
-        try {
-            System.out.println("entry = addToDB(recipe);");
-            entry = addToDB(recipe);
-        }
-        catch(Exception e){
-            System.out.println("entry = addToDB(recipe);");
-            System.out.println( e.getClass().getCanonicalName());
-        }
 
-        System.out.println(">>> end of recent queue add");
 
-        return entry;
+        return returnEntry;
 
 
     }

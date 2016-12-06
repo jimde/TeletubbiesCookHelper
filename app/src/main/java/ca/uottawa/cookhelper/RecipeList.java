@@ -100,7 +100,7 @@ public class RecipeList extends ListActivity implements AdapterView.OnItemClickL
             //System.out.println(RecipeDataSource.encodeToString(entry));
             myIntent.putExtra("item_data", RecipeDataSource.encodeToString(entry));
 
-            System.out.println("recentDB.addToQueue(recipe);");
+            System.out.println("recentDB.addToQueue(entry);");
             recentDB.addToQueue(recipe);
         }
         catch(Exception e){
