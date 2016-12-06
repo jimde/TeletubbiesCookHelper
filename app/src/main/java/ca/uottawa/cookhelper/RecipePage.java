@@ -120,8 +120,11 @@ public class RecipePage extends ListActivity {
         //finish();
     }
 
+    /*
     @Override
     public void onResume(){
+        System.out.println("recipe page onresume");
+
         Recipe recipe = (Recipe) recipeDB.getEntry((long) entry.getKey()).getValue();
 
         recipeTitle = (TextView) findViewById(R.id.recipePageTitle);
@@ -141,6 +144,6 @@ public class RecipePage extends ListActivity {
 
         super.onResume();
     }
-
+    */
 
 }

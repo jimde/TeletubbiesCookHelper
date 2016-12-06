@@ -22,7 +22,7 @@ public class RecipeResults extends ListActivity implements AdapterView.OnItemCli
         Entry entry;
         List<Entry> values = new ArrayList<Entry>();
         String s = getIntent().getStringExtra("item_data");
-        System.out.println("s:"+s);
+        //System.out.println("s:"+s);
         try {
             entry = (Entry) RecipeDataSource.decodeFromString(s);
             values = (ArrayList<Entry>)entry.getValue();

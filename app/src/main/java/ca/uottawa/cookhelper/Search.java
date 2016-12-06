@@ -43,8 +43,11 @@ public class Search extends AppCompatActivity {
         recipeDB.open();
 
         userQuery = (EditText)findViewById(R.id.searchBox);
+        recipeCategorySpinner = (Spinner)findViewById(R.id.categorySpinner);
+        recipeTypeSpinner = (Spinner)findViewById(R.id.typeSpinner);
         Intent myIntent = new Intent(this, RecipeResults.class);
-        System.out.println("gettext:"+userQuery.getText().toString());
+        System.out.println("gettext:"+userQuery.getText().toString()+","+recipeCategorySpinner.getSelectedItem().toString()+","+recipeTypeSpinner.getSelectedItem().toString());
+        /*
         if(userQuery.getText().toString().matches("")) {
             System.out.println("empty");
             try {
@@ -65,6 +68,21 @@ public class Search extends AppCompatActivity {
                 System.out.println(e.getClass().getCanonicalName());
             }
         }
+        */
+
+        try{
+            String query = userQuery.getText().toString();
+            String type =recipeTypeSpinner.getSelectedItem().toString();
+            String category = recipeCategorySpinner.getSelectedItem().toString();
+            myIntent.putExtra("item_data",
+                    RecipeDataSource.encodeToString(new Entry("search_result_list",
+                            recipeDB.queryDB(query,type,category))));
+        }
+        catch(Exception e){
+            System.out.println( e.getClass().getCanonicalName());
+        }
+
+
         startActivity(myIntent);
     }
 }
