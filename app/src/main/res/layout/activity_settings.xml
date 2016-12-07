@@ -56,7 +56,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Search results per page"
+                            android:text="Number of Recent Results"
                             android:id="@+id/numSearchResults"
                             android:layout_gravity="center"
                             android:gravity="center"
@@ -147,7 +147,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Update: Check for updates (app in project so updates are unlikely)"
+                            android:text="Update Changes"
                             android:id="@+id/updateSection"
                             android:layout_gravity="center"
                             android:gravity="center"
@@ -165,7 +165,8 @@
                             android:text="Update"
                             android:id="@+id/updateBtn"
                             android:layout_gravity="center"
-                            android:background="#B7C68B" />
+                            android:background="#B7C68B"
+                            android:onClick="setNumberRecent" />
                     </FrameLayout>
                 </LinearLayout>
             </LinearLayout>

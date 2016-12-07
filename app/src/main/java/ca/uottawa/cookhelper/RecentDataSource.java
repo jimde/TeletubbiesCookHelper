@@ -29,7 +29,7 @@ public class RecentDataSource {
     private RecentSQLiteHelper dbHelper;
     private String[] allColumns = { RecentSQLiteHelper.COLUMN_ID,
             RecentSQLiteHelper.COLUMN_RECENT};
-    private int numberStored = 10;
+    public static int numberStored = 10;
 
     public RecentDataSource(Context context){
         dbHelper = new RecentSQLiteHelper(context);

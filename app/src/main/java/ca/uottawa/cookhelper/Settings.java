@@ -6,6 +6,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 
 public class Settings extends AppCompatActivity {
 
@@ -46,5 +47,9 @@ public class Settings extends AppCompatActivity {
                 })
                 .setNegativeButton("No", null)
                 .show();
+    }
+    public void setNumberRecent(View view){
+        EditText numStored = (EditText)findViewById(R.id.setResultsPerPage);
+        RecentDataSource.numberStored = Integer.parseInt(numStored.getText().toString());
     }
 }
