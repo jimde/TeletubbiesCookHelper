@@ -68,6 +68,11 @@ public class CreateRecipe extends AppCompatActivity{
         String ingredients = userRecipeIngredients.getText().toString();
         String type = userRecipeType.getSelectedItem().toString();
         String category = userRecipeCategory.getSelectedItem().toString();
+
+        if(name.equals("")){
+            return;
+        }
+
         try {
             recipeDB.addToDB(new Recipe(name, stringToList(ingredients), category, type, description));
             //recipeDB.addToDB(new Recipe("recipe name", inlist, "category name", "type name", "this is a description"));

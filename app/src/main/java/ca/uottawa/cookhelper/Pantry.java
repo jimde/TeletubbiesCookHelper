@@ -116,13 +116,34 @@ public class Pantry extends ListActivity implements AdapterView.OnItemClickListe
 
     public void clickedAddIngredientBtn(View view) throws IOException, ClassNotFoundException{
         userIngredientInput = (EditText)findViewById(newIngredientTextInput);
-        Entry e = ingredientDB.addToDB(new Ingredient(userIngredientInput.getText().toString()));
-        adapter.add(e);
-        adapter.notifyDataSetChanged();
+        //adapter.add(e);
+        //adapter.notifyDataSetChanged();
+
+        if(userIngredientInput.getText().toString().equals("")){
+            return;
+        }
+
+        ingredientDB = new IngredientDataSource(this);
+        ingredientDB.open();
+        ingredientDB.addToDB(new Ingredient(userIngredientInput.getText().toString()));
+
+        List<Entry> values = new ArrayList<Entry>();
+
+        try {
+            values = ingredientDB.getAllEntries();
+        }
+        catch(IOException i){}
+        catch(ClassNotFoundException c){}
+
+
+        ListView list = getListView();
+        list.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        list.setOnItemClickListener(this);
 
         userIngredientInput.setText("");
 
-
+        adapter = new ArrayAdapter<Entry>(this,android.R.layout.simple_list_item_1, values);
+        setListAdapter(adapter);
 
         /*
         List<Entry> ent = ingredientDB.getAllEntries();

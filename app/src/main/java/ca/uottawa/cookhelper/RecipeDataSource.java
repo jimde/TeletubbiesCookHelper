@@ -44,11 +44,29 @@ public class RecipeDataSource {
     }
 
     public Entry addToDB(Recipe recipe) throws IOException {
-        ContentValues values = new ContentValues();
-        values.put(RecipeSQLiteHelper.COLUMN_RECIPE, encodeToString(recipe));
-        long insertID = database.insert(TABLE_RECIPES, null, values);
-        Entry entry = new Entry(insertID, recipe);
+        Entry entry = recipeExists(recipe);
+        if(entry == null) {
+            ContentValues values = new ContentValues();
+            values.put(RecipeSQLiteHelper.COLUMN_RECIPE, encodeToString(recipe));
+            long insertID = database.insert(TABLE_RECIPES, null, values);
+            entry = new Entry(insertID, recipe);
+        }
         return entry;
+    }
+    private Entry recipeExists(Recipe recipe){
+        try{
+            List<Entry> allEntries = this.getAllEntries();
+            for(int i = 0; i < allEntries.size(); i++){
+                Recipe r = (Recipe)allEntries.get(i).getValue();
+                if(r.getRecipeTitle().equals(recipe.getRecipeTitle())){
+                    return allEntries.get(i);
+                }
+            }
+        }
+        catch(Exception e){
+            System.out.println( e.getClass().getCanonicalName());
+        }
+        return null;
     }
     public void deleteEntry(Entry entry){
         long id = (long)entry.getKey();

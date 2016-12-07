@@ -40,11 +40,14 @@ public class IngredientDataSource {
         dbHelper.close();
     }
 
-    public Entry addToDB(Ingredient ingredient) throws IOException {
-        ContentValues values = new ContentValues();
-        values.put(IngredientSQLiteHelper.COLUMN_INGREDIENT, encodeToString(ingredient));
-        long insertID = database.insert(TABLE_INGREDIENTS, null, values);
-        Entry entry = new Entry(insertID, ingredient);
+    public Entry addToDB(Ingredient ingredient) throws IOException, ClassNotFoundException {
+        Entry entry = ingredientExists(ingredient.getName());
+        if(entry == null) {
+            ContentValues values = new ContentValues();
+            values.put(IngredientSQLiteHelper.COLUMN_INGREDIENT, encodeToString(ingredient));
+            long insertID = database.insert(TABLE_INGREDIENTS, null, values);
+            entry = new Entry(insertID, ingredient);
+        }
         return entry;
     }
     public void deleteEntry(Entry entry){
@@ -88,14 +91,15 @@ public class IngredientDataSource {
     }
 
 
-    public boolean ingredientExists(String s) throws IOException, ClassNotFoundException{
+    public Entry ingredientExists(String s) throws IOException, ClassNotFoundException{
         List<Entry> ingredients = this.getAllEntries();
         for(int i = 0; i < ingredients.size(); i++){
-            if(ingredients.get(i).getValue().equals(s)){
-                return true;
+            Ingredient ingredient = (Ingredient)ingredients.get(i).getValue();
+            if(ingredient.getName().equals(s)){
+                return ingredients.get(i);
             }
         }
-        return false;
+        return null;
     }
 
 
