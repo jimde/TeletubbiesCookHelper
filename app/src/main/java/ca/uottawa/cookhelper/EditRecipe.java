@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -53,6 +54,16 @@ public class EditRecipe extends AppCompatActivity {
         recipeIngredients = (EditText)findViewById(R.id.editIngredients);
         recipeType = (Spinner)findViewById(spinner4);
         recipeCategory = (Spinner) findViewById(spinner5);
+
+        String[] types = new String[]{"Pick One", "Canadian", "Italian", "Cuban", "Chinese", "Japanese", "Greek", "Colombian",
+                "Thai", "Mexican", "Irish", "French" };
+        String[] cats = new String[]{"Pick One","Breakfast","Lunch", "Dinner", "Appetizer", "Dessert", "Drink", "Sauce"};
+
+        ArrayAdapter<String> catAdaptor = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, cats);
+        ArrayAdapter<String> typeAdaptor = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, types);
+
+        recipeCategory.setAdapter(catAdaptor);
+        recipeType.setAdapter(typeAdaptor);
 
         recipeTitle.setText(recipe.getRecipeTitle());
         recipeInstructions.setText(recipe.getText());
