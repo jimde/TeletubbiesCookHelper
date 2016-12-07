@@ -24,7 +24,7 @@
             android:ems="10"
             android:id="@+id/searchBox"
             android:layout_weight="0.17"
-            android:hint="Enter Here! (Seperate by a comma)"
+            android:hint="Enter Here! (Seperate by AND/OR/NOT)"
             android:layout_marginBottom="50dp" />
 
         <TextView
