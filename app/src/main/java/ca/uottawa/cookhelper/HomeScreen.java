@@ -7,6 +7,10 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class HomeScreen extends AppCompatActivity {
     public static IngredientDataSource ingredientDB;
     public static RecipeDataSource recipeDB;
@@ -27,6 +31,39 @@ public class HomeScreen extends AppCompatActivity {
         ingredientDB.open();
         recipeDB.open();
         recentDB.open();
+        try {
+            addDefaultFoods();
+        }
+        catch(Exception e){
+            System.out.println( e.getClass().getCanonicalName());
+        }
+    }
+    private void addDefaultFoods() throws IOException{
+        ingredientDB = new IngredientDataSource(this);
+        recipeDB = new RecipeDataSource(this);
+        recentDB = new RecentDataSource(this);
+        ingredientDB.open();
+        recipeDB.open();
+        recentDB.open();
+
+        List<String> pancakeIngredients = new ArrayList<>();
+        pancakeIngredients.add("Flour");
+        pancakeIngredients.add("Baking Powder");
+        pancakeIngredients.add("Salt");
+        pancakeIngredients.add("White Sugar");
+        pancakeIngredients.add("Milk");
+        pancakeIngredients.add("Egg");
+        pancakeIngredients.add("Melted Butter");
+        Recipe pancakes = new Recipe("Pancakes",pancakeIngredients,"Breakfast","Canadian",
+                "1. In a large bowl, sift together the flour, " +
+                "baking powder, salt and sugar. Make a well in the center and pour in the milk, egg and melted butter; " +
+                "mix until smooth. \n2. Heat a lightly oiled griddle or frying pan over medium high heat. " +
+                "Pour or scoop the batter onto the griddle, using approximately 1/4 cup for each pancake. " +
+                "Brown on both sides and serve hot." );
+        recipeDB.addToDB(pancakes);
+
+
+
     }
     public void toSearchScreenPage(View view){
         Intent myIntent = new Intent(this, Search.class);

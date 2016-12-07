@@ -9,34 +9,21 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="#B3A580">
 
-    <FrameLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/frameLayout">
+        android:layout_height="match_parent">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ABOUT THE APP"
-            android:id="@+id/aboutTheAppHeader"
-            android:textStyle="bold"
-            android:textSize="30dp"
-            android:gravity="center" />
-    </FrameLayout>
+            android:orientation="vertical" >
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+            <TextView
+                android:text="Welcome to the help section of CookHelper\n\nTo add ingredients:\nClick the pineapple in the bottom right corner of the welcome screen. Type you're wanted ingredient in the text section and click &quot;add ingredient&quot;.\n\nAdd Recipe:\nClick &quot;Cookbook&quot; on the welcome screen. At the bottom of the page select &quot;Create New Recipe&quot;. Type in your recipe name, ingredients and instructions in the correct textbox's. Select a food type and catagorie and click &quot;create&quot;.\n\nTo search for a recipe:\nClick the search button on the welcome screen. Add the foods you are looking for (seperated by an &quot;and&quot; or an &quot;or&quot; and select search. A list of all your recipes that have those ingredients will appear.\n\nSearch for most recent recipes:\nSimply click the &quot;recent recipes&quot; button on the home screen.\n\nEdit or Deleting Foods and Recipes\nDo into your Pantry or Cookbook and select an existing food or recipe from the list. For foods an option will appear to delete that food. For recipes, you will enter an edit screen that allows you to edit recipes or delete it by pressing the &quot;delete&quot; button. You can confirm any edits you have made to a recipe my clicking &quot;confim edits&quot; at the bottom of the screen."
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView2" />
+        </LinearLayout>
+    </ScrollView>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="It&apos;s great cause we are the Teletubbies! lol"
-            android:id="@+id/aboutDescrip"
-            android:layout_gravity="center_horizontal|top"
-            android:gravity="center_vertical|center_horizontal" />
-    </FrameLayout>
 </RelativeLayout>
