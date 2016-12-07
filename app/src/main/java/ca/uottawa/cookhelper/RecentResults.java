@@ -70,5 +70,21 @@ public class RecentResults extends ListActivity implements AdapterView.OnItemCli
         recentDB = new RecentDataSource(this);
         recentDB.open();
         recentDB.clearDB();
+
+        List<Entry> values = new ArrayList<Entry>();
+
+        try {
+            values = recentDB.getAllEntries();
+        }
+        catch(Exception e){
+            System.out.println( e.getClass().getCanonicalName());
+        }
+
+        ListView list = getListView();
+        list.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        list.setOnItemClickListener(this);
+
+        adapter = new ArrayAdapter<Entry>(this,android.R.layout.simple_list_item_1, values);
+        setListAdapter(adapter);
     }
 }

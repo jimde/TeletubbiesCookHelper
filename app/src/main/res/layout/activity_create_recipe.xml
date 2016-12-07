@@ -150,7 +150,7 @@
                 android:id="@+id/createRecipeBtn"
                 android:layout_gravity="center"
                 android:background="#B7C68B"
-                android:onClick="clickedConfirmBtn (CreateRecipe)" />
+                android:onClick="clickedConfirmBtn" />
         </FrameLayout>
 
     </LinearLayout>
