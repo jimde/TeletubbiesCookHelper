@@ -41,11 +41,12 @@ public class CreateRecipe extends AppCompatActivity{
         userRecipeType = (Spinner)findViewById(typeSpinner);
         userRecipeCategory = (Spinner) findViewById(categorySpinner);
 
-        String[] cats = new String[]{"Pick One", "Canadian", "Italian", "Cuban"};
-        String[] types = new String[]{"Pick One","Breakfast","Lunch","Dinner"};
+        String[] types = new String[]{"Pick One", "Canadian", "Italian", "Cuban", "Chinese", "Japanese", "Greek", "Colombian",
+                "Thai", "Mexican", "Irish", "French" };
+        String[] cats = new String[]{"Pick One","Breakfast","Lunch", "Dinner", "Appetizer", "Dessert", "Drink", "Sauce"};
 
-        ArrayAdapter<String> typeAdaptor = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, types);
         ArrayAdapter<String> catAdaptor = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, cats);
+        ArrayAdapter<String> typeAdaptor = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, types);
 
         userRecipeCategory.setAdapter(catAdaptor);
         userRecipeType.setAdapter(typeAdaptor);

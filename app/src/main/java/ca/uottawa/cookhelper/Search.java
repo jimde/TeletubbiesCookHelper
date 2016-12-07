@@ -27,12 +27,13 @@ public class Search extends AppCompatActivity {
         userQuery = (EditText)findViewById(R.id.searchBox);
 
         Spinner catSpinner = (Spinner) findViewById(R.id.categorySpinner);
-        String[] cats = new String[]{"Pick One", "Canadian", "Italian", "Cuban"};
+        String[] cats = new String[]{"Pick One","Breakfast","Lunch", "Dinner", "Appetizer", "Dessert", "Drink", "Sauce"};
         ArrayAdapter<String> catAdaptor= new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, cats);
         catSpinner.setAdapter(catAdaptor);
 
         Spinner typeSpinner = (Spinner) findViewById(R.id.typeSpinner);
-        String[] types = new String[]{"Pick One", "Breakfast", "Lunch", "Dinner"};
+        String[] types = new String[]{"Pick One", "Canadian", "Italian", "Cuban", "Chinese", "Japanese", "Greek", "Colombian",
+                "Thai", "Mexican", "Irish", "French" };
         ArrayAdapter<String> typeAdaptor = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, types);
         typeSpinner.setAdapter(typeAdaptor);
 

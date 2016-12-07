@@ -60,13 +60,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.06" />
 
-        <ImageButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srcCompat="@mipmap/ic_launcher"
-            android:id="@+id/recipeImgBtn"
-            android:layout_weight="0.05" />
-
         <Space
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
