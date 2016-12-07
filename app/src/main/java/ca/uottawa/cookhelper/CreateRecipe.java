@@ -13,11 +13,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static ca.uottawa.cookhelper.R.id.ingredientEntryBox;
-import static ca.uottawa.cookhelper.R.id.recipeInstrBox;
-import static ca.uottawa.cookhelper.R.id.recipeTitleBox;
-import static ca.uottawa.cookhelper.R.id.spinner4;
-import static ca.uottawa.cookhelper.R.id.spinner5;
+import static ca.uottawa.cookhelper.R.id.categorySpinner;
+import static ca.uottawa.cookhelper.R.id.directionPlaceHolder;
+import static ca.uottawa.cookhelper.R.id.ingredientPlaceHolder;
+import static ca.uottawa.cookhelper.R.id.namePlaceHolder;
+import static ca.uottawa.cookhelper.R.id.typeSpinner;
 
 public class CreateRecipe extends AppCompatActivity{
     private TextView userRecipeName;
@@ -34,12 +34,12 @@ public class CreateRecipe extends AppCompatActivity{
         recipeDB = new RecipeDataSource(this);
         recipeDB.open();
 
-        userRecipeName = (TextView) findViewById(recipeTitleBox);
-        userRecipeDescription = (EditText)findViewById(recipeInstrBox);
-        userRecipeIngredients = (EditText)findViewById(ingredientEntryBox);
+        userRecipeName = (TextView) findViewById(namePlaceHolder);
+        userRecipeDescription = (EditText)findViewById(directionPlaceHolder);
+        userRecipeIngredients = (EditText)findViewById(ingredientPlaceHolder);
 
-        userRecipeType = (Spinner)findViewById(spinner4);
-        userRecipeCategory = (Spinner) findViewById(spinner5);
+        userRecipeType = (Spinner)findViewById(typeSpinner);
+        userRecipeCategory = (Spinner) findViewById(categorySpinner);
 
         String[] cats = new String[]{"Pick One", "Canadian", "Italian", "Cuban"};
         String[] types = new String[]{"Pick One","Breakfast","Lunch","Dinner"};
@@ -50,7 +50,7 @@ public class CreateRecipe extends AppCompatActivity{
         userRecipeCategory.setAdapter(catAdaptor);
         userRecipeType.setAdapter(typeAdaptor);
 
-        userRecipeCategory = (Spinner)findViewById(spinner5);
+        userRecipeCategory = (Spinner)findViewById(categorySpinner);
     }
 
 

@@ -10,135 +10,147 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="#B3A580">
 
+    <TextView
+        android:text="Create a Recipe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/createRec"
+        android:textSize="18sp" />
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:weightSum="1"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
-        <TextView
+        <ScrollView
             android:layout_width="match_parent"
-            android:text="Recipe Title"
-            android:id="@+id/textView33"
-            android:layout_gravity="center_horizontal"
-            android:textAlignment="center"
-            android:textSize="18sp"
-            android:layout_height="20sp" />
+            android:layout_height="23dp"
+            android:layout_below="@+id/createRec"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="17dp"
+            android:id="@+id/ScrollView">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/recipeTitleBox"
-            android:layout_gravity="center_horizontal" />
-
-        <TextView
-            android:text="Ingredients"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/ingredientsHeader"
-            android:textAlignment="center"
-            android:textSize="18sp" />
+            </LinearLayout>
+        </ScrollView>
 
         <TextView
-            android:text="--Seperate with a comma--"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView9"
-            android:gravity="center" />
+            android:id="@+id/recipeNameHeader"
+            android:text="Name:" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:ems="10"
-            android:id="@+id/ingredientEntryBox" />
+            android:id="@+id/namePlaceHolder" />
 
-        <TextView
-            android:text="Recipe Instructions"
+        <Space
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView3"
-            android:gravity="center_horizontal"
-            android:textSize="18sp" />
+            android:layout_weight="0.06" />
+
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@mipmap/ic_launcher"
+            android:id="@+id/recipeImgBtn"
+            android:layout_weight="0.05" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.13" />
+
+        <TextView
+            android:text="Ingredients:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ingredientHeader" />
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="108dp"
+            android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:ems="10"
-            android:id="@+id/recipeInstrBox" />
+            android:id="@+id/ingredientPlaceHolder" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.11" />
 
         <TextView
+            android:text="Directions:"
             android:layout_width="match_parent"
-            android:layout_height="31dp"
-            android:text="Food Type"
-            android:id="@+id/FoodType"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center"
-            android:textSize="20sp" />
+            android:layout_height="wrap_content"
+            android:id="@+id/directionHeader" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/directionPlaceHolder"
+            android:layout_weight="0.16" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.12" />
+
+        <TextView
+            android:text="Category:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/categoryHeader"
+            android:layout_weight="0.09" />
 
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/spinner4" />
+            android:id="@+id/categorySpinner" />
 
-        <TextView
+        <Space
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Food Category"
-            android:id="@+id/textView8"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center"
-            android:nestedScrollingEnabled="true"
-            android:textSize="20sp" />
+            android:layout_weight="0.13" />
+
+        <TextView
+            android:text="Type:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/typeHeader"
+            android:layout_weight="0.09" />
 
         <Spinner
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/spinner5" />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Create!"
-            android:id="@+id/button12"
-            android:layout_gravity="center_horizontal"
-            android:background="#B7C68B"
-            android:onClick="clickedConfirmBtn" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="1"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true">
+            android:layout_height="51dp"
+            android:id="@+id/typeSpinner" />
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="16dp"
+            android:layout_weight="0.29">
 
-            <ImageView
-                android:layout_width="wrap_content"
+            <Button
+                android:text="Create"
+                android:layout_width="142dp"
                 android:layout_height="wrap_content"
-                app:srcCompat="@mipmap/ic_launcher"
-                android:id="@+id/imageView6"
-                android:layout_weight="1" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Creating a Recipe"
-                android:id="@+id/textView32"
-                android:textSize="25dp"
-                android:gravity="center"
-                android:layout_marginBottom="0dp"
-                android:textStyle="normal|bold|italic" />
+                android:id="@+id/createRecipeBtn"
+                android:layout_gravity="center"
+                android:background="#B7C68B"
+                android:onClick="clickedConfirmBtn (CreateRecipe)" />
         </FrameLayout>
 
     </LinearLayout>
