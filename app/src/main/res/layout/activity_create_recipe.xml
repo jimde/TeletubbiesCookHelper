@@ -50,7 +50,7 @@
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="26dp"
+            android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:ems="10"
             android:id="@+id/namePlaceHolder" />
@@ -149,7 +149,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/createRecipeBtn"
                 android:layout_gravity="center"
-                android:background="#B7C68B" />
+                android:background="#B7C68B"
+                android:onClick="clickedConfirmBtn (CreateRecipe)" />
         </FrameLayout>
 
     </LinearLayout>
