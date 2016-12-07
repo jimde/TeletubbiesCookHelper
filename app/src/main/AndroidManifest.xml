@@ -26,7 +26,8 @@
         <activity android:name=".Settings" />
         <activity android:name=".RecentResults" />
         <activity android:name=".IngredientPage" />
-        <activity android:name=".EditRecipe"></activity>
+        <activity android:name=".EditRecipe" />
+        <activity android:name=".Egg"></activity>
     </application>
 
 </manifest>

@@ -48,4 +48,8 @@ public class HomeScreen extends AppCompatActivity {
         Intent myIntent = new Intent(this, RecipeList.class);
         startActivity(myIntent);
     }
+    public void toEgg(View view){
+        Intent myIntent = new Intent(this, Egg.class);
+        startActivity(myIntent);
+    }
 }
