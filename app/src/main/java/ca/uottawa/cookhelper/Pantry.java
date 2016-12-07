@@ -1,7 +1,9 @@
 package ca.uottawa.cookhelper;
 
 import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -51,27 +53,58 @@ public class Pantry extends ListActivity implements AdapterView.OnItemClickListe
     public void onItemClick(AdapterView<?> parent, View view, int position, long id){
         System.out.println("clicked pantry item");
 
-        Intent myIntent = new Intent(Pantry.this, IngredientPage.class);
+        //Intent myIntent = new Intent(Pantry.this, IngredientPage.class);
 
         try {
-            Entry entry = (Entry)parent.getItemAtPosition(position);
+            final Entry entry = (Entry)parent.getItemAtPosition(position);
             Ingredient ingredient = (Ingredient) entry.getValue();
             System.out.println(ingredient.getName());
-            myIntent.putExtra("item_data", RecipeDataSource.encodeToString(entry));
+
+
+
+            new AlertDialog.Builder(this)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setTitle("Delete?")
+                    .setMessage("Are you sure you want to delete this ingredient?")
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            IngredientDataSource ingredientDB = new IngredientDataSource(Pantry.this);
+                            ingredientDB.open();
+
+
+                            ingredientDB.deleteEntry(entry);
+
+
+                            //finish();
+                        }
+
+                    })
+                    .setNegativeButton("No", null)
+                    .show();
+
+
+
+            //myIntent.putExtra("item_data", RecipeDataSource.encodeToString(entry));
         }
         catch(Exception e){
             System.out.println( e.getClass().getCanonicalName());
         }
-        startActivity(myIntent);
+        //startActivity(myIntent);
     }
 
 
     public void clickedAddIngredientBtn(View view) throws IOException, ClassNotFoundException{
-
+        userIngredientInput = (EditText)findViewById(newIngredientTextInput);
         Entry e = ingredientDB.addToDB(new Ingredient(userIngredientInput.getText().toString()));
         adapter.add(e);
         adapter.notifyDataSetChanged();
+
         userIngredientInput.setText("");
+
+
+
         /*
         List<Entry> ent = ingredientDB.getAllEntries();
         List<Ingredient> dump = new ArrayList<Ingredient>();
