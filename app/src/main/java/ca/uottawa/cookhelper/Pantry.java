@@ -71,6 +71,7 @@ public class Pantry extends ListActivity implements AdapterView.OnItemClickListe
         Entry e = ingredientDB.addToDB(new Ingredient(userIngredientInput.getText().toString()));
         adapter.add(e);
         adapter.notifyDataSetChanged();
+        userIngredientInput.setText("");
         /*
         List<Entry> ent = ingredientDB.getAllEntries();
         List<Ingredient> dump = new ArrayList<Ingredient>();

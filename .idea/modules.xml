@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CookHelper.iml" filepath="$PROJECT_DIR$/CookHelper.iml" />
       <module fileurl="file://$PROJECT_DIR$/TeletubbiesCookHelper.iml" filepath="$PROJECT_DIR$/TeletubbiesCookHelper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TeletubbiesCookHelper.iml" filepath="$PROJECT_DIR$/TeletubbiesCookHelper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
