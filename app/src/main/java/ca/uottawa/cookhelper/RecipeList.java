@@ -87,6 +87,7 @@ public class RecipeList extends ListActivity implements AdapterView.OnItemClickL
         */
         Intent myIntent = new Intent(this, CreateRecipe.class);
         startActivity(myIntent);
+        finish();
     }
     public void onItemClick(AdapterView<?> parent, View view, int position, long id){
         System.out.println("clicked list item");
