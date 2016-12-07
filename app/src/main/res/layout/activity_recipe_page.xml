@@ -8,34 +8,14 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="ca.uottawa.cookhelper.RecipePage">
+    tools:context="ca.uottawa.cookhelper.RecipePage"
+    android:background="#B3A580">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <Button
-                android:text="Edit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/editRecipeBtn"
-                android:layout_weight="1"
-                android:onClick="clickedEdit" />
-
-            <Button
-                android:text="Delete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/deleteRecipeBtn"
-                android:layout_weight="1"
-                android:onClick="clickedDelete" />
-        </LinearLayout>
+        android:layout_height="match_parent"
+        android:weightSum="1">
 
         <LinearLayout
             android:orientation="vertical"
@@ -44,9 +24,11 @@
 
             <TextView
                 android:text="TextView"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/recipePageTitle" />
+                android:id="@+id/recipePageTitle"
+                android:textSize="30sp"
+                android:gravity="center" />
 
             <TextView
                 android:text="TextView"
@@ -56,22 +38,74 @@
 
             <TextView
                 android:text="TextView"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/recipePageCategory" />
-
-            <TextView
-                android:text="TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/recipePageDescription" />
 
         </LinearLayout>
 
         <ListView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@android:id/list" />
+            android:layout_height="97dp"
+            android:id="@android:id/list"
+            android:layout_weight="0.63" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="207dp"
+            android:layout_weight="0.30">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/recipePageDescription" />
+            </LinearLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.69">
+
+                <Button
+                    android:text="Edit"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editRecipeBtn"
+                    android:layout_weight="0.69"
+                    android:onClick="clickedEdit"
+                    android:background="#B7C68B"
+                    android:layout_gravity="center" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.69">
+
+                <Button
+                    android:text="Delete"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/deleteRecipeBtn"
+                    android:layout_weight="0.72"
+                    android:onClick="clickedDelete"
+                    android:background="#B7C68B"
+                    android:layout_gravity="center" />
+            </FrameLayout>
+
+        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>
