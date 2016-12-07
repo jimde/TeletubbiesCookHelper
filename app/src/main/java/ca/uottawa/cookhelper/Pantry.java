@@ -76,7 +76,7 @@ public class Pantry extends ListActivity implements AdapterView.OnItemClickListe
 
                             ingredientDB.deleteEntry(entry);
 
-
+                            resetList();
                             //finish();
                         }
 
@@ -93,7 +93,26 @@ public class Pantry extends ListActivity implements AdapterView.OnItemClickListe
         }
         //startActivity(myIntent);
     }
+    private void resetList(){
+        ingredientDB = new IngredientDataSource(this);
+        ingredientDB.open();
 
+        List<Entry> values = new ArrayList<Entry>();
+
+        try {
+            values = ingredientDB.getAllEntries();
+        }
+        catch(IOException i){}
+        catch(ClassNotFoundException c){}
+
+
+        ListView list = getListView();
+        list.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        list.setOnItemClickListener(this);
+
+        adapter = new ArrayAdapter<Entry>(this,android.R.layout.simple_list_item_1, values);
+        setListAdapter(adapter);
+    }
 
     public void clickedAddIngredientBtn(View view) throws IOException, ClassNotFoundException{
         userIngredientInput = (EditText)findViewById(newIngredientTextInput);
