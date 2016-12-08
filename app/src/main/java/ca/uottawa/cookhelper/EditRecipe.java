@@ -41,7 +41,6 @@ public class EditRecipe extends AppCompatActivity {
             recipe = (Recipe)entry.getValue();
         }
         catch(Exception e){
-            System.out.println(">>> EditRecipe");
             System.out.println( e.getClass().getCanonicalName());
         }
 
@@ -92,10 +91,10 @@ public class EditRecipe extends AppCompatActivity {
         String name = recipeTitle.getText().toString();
         String description = recipeInstructions.getText().toString();
         String ingredients = recipeIngredients.getText().toString();
-        //String type = recipeType.getSelectedItem().toString();
-        //String category = recipeCategory.getSelectedItem().toString();
-        String type = recipe.getTypeName();
-        String category = recipe.getCategoryName();
+        String type = recipeType.getSelectedItem().toString();
+        String category = recipeCategory.getSelectedItem().toString();
+        //String type = recipe.getTypeName();
+        //String category = recipe.getCategoryName();
         newRecipe = new Recipe(name, CreateRecipe.stringToList(ingredients), category, type, description);
 
 
