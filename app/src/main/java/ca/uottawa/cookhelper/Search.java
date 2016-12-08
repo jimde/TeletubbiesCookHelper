@@ -47,34 +47,15 @@ public class Search extends AppCompatActivity {
         recipeCategorySpinner = (Spinner)findViewById(R.id.categorySpinner);
         recipeTypeSpinner = (Spinner)findViewById(R.id.typeSpinner);
         Intent myIntent = new Intent(this, RecipeResults.class);
-        System.out.println("gettext:"+userQuery.getText().toString()+","+recipeCategorySpinner.getSelectedItem().toString()+","+recipeTypeSpinner.getSelectedItem().toString());
-        /*
-        if(userQuery.getText().toString().matches("")) {
-            System.out.println("empty");
-            try {
-                myIntent.putExtra("item_data", RecipeDataSource.encodeToString(new Entry("search_result_list", recipeDB.getAllEntries())));
-            }
-            catch(Exception e){
-                System.out.println(">>> == \"\"");
-                System.out.println( e.getClass().getCanonicalName());
-            }
-        }
-        else{
-            System.out.println("not empty");
-            try {
-                myIntent.putExtra("item_data",
-                        RecipeDataSource.encodeToString(new Entry("search_result_list", recipeDB.queryDB(userQuery.getText().toString()))));
-            } catch (Exception e) {
-                System.out.println(">>> != \"\"");
-                System.out.println(e.getClass().getCanonicalName());
-            }
-        }
-        */
+        System.out.println("gettext:"+userQuery.getText().toString()+","+recipeCategorySpinner.getSelectedItem().toString()
+                +","+recipeTypeSpinner.getSelectedItem().toString());
+
 
         try{
             String query = userQuery.getText().toString();
             String type =recipeTypeSpinner.getSelectedItem().toString();
             String category = recipeCategorySpinner.getSelectedItem().toString();
+            System.out.println(recipeDB.queryDB(query,type,category).size());
             myIntent.putExtra("item_data",
                     RecipeDataSource.encodeToString(new Entry("search_result_list",
                             recipeDB.queryDB(query,type,category))));
