@@ -28,9 +28,10 @@ public class RecipeResults extends ListActivity implements AdapterView.OnItemCli
             values = (ArrayList<Entry>)entry.getValue();
         }
         catch(Exception e){
-            System.out.println(">>> reading from intent");
             System.out.println( e.getClass().getCanonicalName());
         }
+
+        System.out.println("recipe results, number of recipes:" + values.size());
 
         ListView list = getListView();
         list.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);

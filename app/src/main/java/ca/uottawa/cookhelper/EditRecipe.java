@@ -55,7 +55,7 @@ public class EditRecipe extends AppCompatActivity {
         recipeType = (Spinner)findViewById(spinner4);
         recipeCategory = (Spinner) findViewById(spinner5);
 
-        String[] types = new String[]{"Pick One", "Canadian", "Italian", "Cuban", "Chinese", "Japanese", "Greek", "Colombian",
+        String[] types = new String[]{"Pick One", "Canadian", "Murica", "Italian", "Cuban", "Chinese", "Japanese", "Greek", "Colombian",
                 "Thai", "Mexican", "Irish", "French" };
         String[] cats = new String[]{"Pick One","Breakfast","Lunch", "Dinner", "Appetizer", "Dessert", "Drink", "Sauce"};
 

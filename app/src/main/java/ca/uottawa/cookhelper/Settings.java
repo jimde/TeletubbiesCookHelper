@@ -9,11 +9,21 @@ import android.view.View;
 import android.widget.EditText;
 
 public class Settings extends AppCompatActivity {
-
+    private EditText numStored;
+    private RecentDataSource recentDB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
+        recentDB = new RecentDataSource(this);
+        recentDB.open();
+        numStored = (EditText)findViewById(R.id.setResultsPerPage);
+        numStored.setText(Integer.toString(recentDB.getQueueSize()));
+
+
+
+
     }
 
 
@@ -49,7 +59,10 @@ public class Settings extends AppCompatActivity {
                 .show();
     }
     public void setNumberRecent(View view){
-        EditText numStored = (EditText)findViewById(R.id.setResultsPerPage);
-        RecentDataSource.numberStored = Integer.parseInt(numStored.getText().toString());
+        numStored = (EditText)findViewById(R.id.setResultsPerPage);
+        recentDB = new RecentDataSource(this);
+        recentDB.setQueueSize(Integer.parseInt(numStored.getText().toString()));
+        System.out.println("set queue size:"+Integer.parseInt(numStored.getText().toString()));
+        finish();
     }
 }

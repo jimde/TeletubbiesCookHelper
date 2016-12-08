@@ -29,7 +29,7 @@ public class RecentDataSource {
     private RecentSQLiteHelper dbHelper;
     private String[] allColumns = { RecentSQLiteHelper.COLUMN_ID,
             RecentSQLiteHelper.COLUMN_RECENT};
-    public static int numberStored = 10;
+    private static int numberStored = 6;
 
     public RecentDataSource(Context context){
         dbHelper = new RecentSQLiteHelper(context);
@@ -66,13 +66,28 @@ public class RecentDataSource {
             cursor.moveToNext();
         }
         cursor.close();
+        try {
+            if (entries.size() > numberStored) {
+                while(entries.size() > numberStored){
+                    deleteEntry(entries.get(0));
+                    entries.remove(0);
+                }
+
+            }
+        }
+        catch(Exception e){
+            System.out.println("if (allEntries.size() > numberStored)");
+            System.out.println( e.getClass().getCanonicalName());
+        }
         return entries;
     }
 
     public void setQueueSize(int size){
         numberStored = size;
     }
-
+    public int getQueueSize(){
+        return numberStored;
+    }
     public Entry addToQueue(Recipe recipe){
         System.out.println(">>> added to recent queue");
 
@@ -110,9 +125,19 @@ public class RecentDataSource {
 
 
 
+        checkSize();
+
+
+
+        return returnEntry;
+
+
+    }
+    private void checkSize(){
         try {
-            if (allEntries.size() >= numberStored) {
-                while(allEntries.size() >= numberStored){
+            List<Entry> allEntries = this.getAllEntries();
+            if (allEntries.size() > numberStored) {
+                while(allEntries.size() > numberStored){
                     deleteEntry(allEntries.get(0));
                     allEntries.remove(0);
                 }
@@ -123,14 +148,7 @@ public class RecentDataSource {
             System.out.println("if (allEntries.size() > numberStored)");
             System.out.println( e.getClass().getCanonicalName());
         }
-
-
-
-        return returnEntry;
-
-
     }
-
     public void clearDB(){
         List<Entry> allEntries;
         try {

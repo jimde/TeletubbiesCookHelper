@@ -32,7 +32,7 @@ public class Search extends AppCompatActivity {
         catSpinner.setAdapter(catAdaptor);
 
         Spinner typeSpinner = (Spinner) findViewById(R.id.typeSpinner);
-        String[] types = new String[]{"Pick One", "Canadian", "Italian", "Cuban", "Chinese", "Japanese", "Greek", "Colombian",
+        String[] types = new String[]{"Pick One", "Canadian", "Murica", "Italian", "Cuban", "Chinese", "Japanese", "Greek", "Colombian",
                 "Thai", "Mexican", "Irish", "French" };
         ArrayAdapter<String> typeAdaptor = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, types);
         typeSpinner.setAdapter(typeAdaptor);

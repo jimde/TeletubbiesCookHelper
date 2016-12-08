@@ -154,42 +154,26 @@ public class RecipeDataSource {
         return results;
     }
 
-    public List<Entry> queryDB(String query, String queryType, String queryCatagory) {
+    public List<Entry> queryDB(String query, String queryType, String queryCategory) {
         List<Entry> tempResults = new ArrayList<Entry>();
         List<Entry> results = new ArrayList<Entry>();
         List<Entry> allEntries = new ArrayList<Entry>();
 
-        System.out.println(">>> queryDB(...)");
-        /*
-        Cursor cursor = database.query(TABLE_RECIPES, allColumns, null, null, null, null, null);
-        cursor.moveToFirst();
-        while(!cursor.isAfterLast()){
-            long id = cursor.getLong(0);
-            Recipe recipe = new Recipe();
-            try{
-                recipe = (Recipe)decodeFromString(cursor.getString(1));
-            }
-            catch(Exception e){
-                System.out.println( e.getClass().getCanonicalName());
-            }
-            Entry entry = new Entry(id,recipe);
-            allEntries.add(entry);
-            cursor.moveToNext();
-        }
-        cursor.close();
-        */
+        //System.out.println(">>> queryDB(...)");
+
         try {
             allEntries = this.getAllEntries();
         }
         catch(Exception e){
             System.out.println( e.getClass().getCanonicalName());
         }
-        System.out.println("!query.equals(\"\"):"+!query.equals(""));
-        if(!query.equals("")) {
+
+        //System.out.println(query.trim().length() > 0);
+        if(query.trim().length() > 0) {
             for (int i = 0; i < allEntries.size(); i++) {
                 Recipe r = (Recipe) allEntries.get(i).getValue();
-                System.out.println("checking recipe: " + r.getRecipeTitle());
-                System.out.println("check recipe result:" + checkRecipeSearch((Recipe) allEntries.get(i).getValue(), query));
+                //System.out.println("checking recipe: " + r.getRecipeTitle());
+                //System.out.println("check recipe result:" + checkRecipeSearch((Recipe) allEntries.get(i).getValue(), query));
                 if (checkRecipeSearch((Recipe) allEntries.get(i).getValue(), query)) {
                     tempResults.add(allEntries.get(i));
                 }
@@ -198,25 +182,26 @@ public class RecipeDataSource {
         else{
             tempResults = allEntries;
         }
+
         for(int i = 0; i < tempResults.size(); i++){
             Recipe recipe = (Recipe)allEntries.get(i).getValue();
-            if(checkTypeAndCategory(recipe,queryType,queryCatagory)){
+            if(checkTypeAndCategory(recipe,queryType,queryCategory)){
                 results.add(tempResults.get(i));
             }
         }
 
-
+        System.out.println("query result size:" + results.size());
 
         return results;
     }
 
     public boolean checkTypeAndCategory(Recipe recipe, String type, String category){
-        System.out.println(">>> checkTypeAndCategory");
-        System.out.println("recipe:"+recipe.getRecipeTitle());
-        System.out.println("recipe type:"+recipe.getTypeName());
-        System.out.println("recipe category:"+recipe.getCategoryName());
-        System.out.println("query type:"+type);
-        System.out.println("query category:"+category);
+        //System.out.println(">>> checkTypeAndCategory");
+        //System.out.println("recipe:"+recipe.getRecipeTitle());
+        //System.out.println("recipe type:"+recipe.getTypeName());
+        //System.out.println("recipe category:"+recipe.getCategoryName());
+        //System.out.println("query type:"+type);
+        //System.out.println("query category:"+category);
         if(type.equals("Pick One") && category.equals("Pick One")){
             return true;
         }
@@ -234,7 +219,7 @@ public class RecipeDataSource {
 
     private boolean checkRecipeSearch(Recipe recipe, String search){ //check if recipe matches search criteria
         String newSearch = convertExpression(search,recipe);
-        System.out.println(">>>>>>>> newsearch:" + newSearch);
+        //System.out.println(">>>>>>>> newsearch:" + newSearch);
         return evaluateExpression(newSearch);
 
         /*
@@ -258,7 +243,7 @@ public class RecipeDataSource {
         //System.out.println(">>>>>>>>>>>>>>>>>>>> start of ingredientInRecipe");
         query = query.replaceAll("\\s+","");
         for(int i = 0; i < ingredients.size(); i++){
-            if(ingredients.get(i).toUpperCase().equals(query.toUpperCase())){
+            if(ingredients.get(i).toUpperCase().contains(query.toUpperCase())){
                 return true;
             }
         }
