@@ -55,7 +55,6 @@ public class Search extends AppCompatActivity {
             String query = userQuery.getText().toString();
             String type =recipeTypeSpinner.getSelectedItem().toString();
             String category = recipeCategorySpinner.getSelectedItem().toString();
-            System.out.println(recipeDB.queryDB(query,type,category).size());
             myIntent.putExtra("item_data",
                     RecipeDataSource.encodeToString(new Entry("search_result_list",
                             recipeDB.queryDB(query,type,category))));

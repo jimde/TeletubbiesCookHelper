@@ -184,13 +184,13 @@ public class RecipeDataSource {
         }
 
         for(int i = 0; i < tempResults.size(); i++){
-            Recipe recipe = (Recipe)allEntries.get(i).getValue();
+            Recipe recipe = (Recipe)tempResults.get(i).getValue();
             if(checkTypeAndCategory(recipe,queryType,queryCategory)){
                 results.add(tempResults.get(i));
             }
         }
 
-        System.out.println("query result size:" + results.size());
+        //System.out.println("query result size:" + results.size());
 
         return results;
     }
@@ -240,14 +240,13 @@ public class RecipeDataSource {
 
 
     private boolean ingredientInRecipe(String query, List<String> ingredients){
-        //System.out.println(">>>>>>>>>>>>>>>>>>>> start of ingredientInRecipe");
         query = query.replaceAll("\\s+","");
         for(int i = 0; i < ingredients.size(); i++){
+            boolean test = ingredients.get(i).toUpperCase().contains(query.toUpperCase());
             if(ingredients.get(i).toUpperCase().contains(query.toUpperCase())){
                 return true;
             }
         }
-        //System.out.println(">>>>>>>>>>>>>>>>>>>> end of ingredientInRecipe");
         return false;
     }
     private String convertExpression(String search, Recipe recipe){

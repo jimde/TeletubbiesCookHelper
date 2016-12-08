@@ -31,7 +31,7 @@ public class RecipeResults extends ListActivity implements AdapterView.OnItemCli
             System.out.println( e.getClass().getCanonicalName());
         }
 
-        System.out.println("recipe results, number of recipes:" + values.size());
+        //System.out.println("recipe results, number of recipes:" + values.size());
 
         ListView list = getListView();
         list.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
