@@ -1,1 +1,1 @@
-![alt tag](https://raw.githubusercontent.com/jimde/TeletubbiesCookHelper/master/app/src/main/res/drawable/tete.jpg)
+![alt tag](app/src/main/res/drawable/tete.jpg)
